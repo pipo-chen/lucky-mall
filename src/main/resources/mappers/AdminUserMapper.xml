@@ -120,9 +120,22 @@
     where admin_user_id = #{adminUserId,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByUserNameAndPassword" resultType="int" parameterType="map">
-    select count(1)
+  <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
     from mall_admin_user
     where login_user_name = #{username} and login_password = #{password}
+  </select>
+
+  <select id="checkUsername" parameterType="string" resultType="int">
+    select count(1)
+    from mall_admin_user
+    where login_user_name = #{username}
+  </select>
+
+  <select id="checkNickname" resultType="int" parameterType="string">
+    select count(1)
+    from mall_admin_user
+    where nick_name = #{nickname}
   </select>
 </mapper>

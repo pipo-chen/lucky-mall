@@ -17,5 +17,11 @@ public interface AdminUserMapper {
 
     int updateByPrimaryKey(AdminUser record);
 
-    int selectByUserNameAndPassword(@Param("username") String username, @Param("password") String password);
+    AdminUser selectLogin(@Param("username") String username, @Param("password") String password);
+
+    int checkNickname(String nickname);
+
+    int checkUsername(String username);
+
+
 }
