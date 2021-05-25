@@ -3,6 +3,8 @@ package com.mall.dao;
 import com.mall.pojo.AdminUser;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface AdminUserMapper {
 
     int deleteByPrimaryKey(Integer adminUserId);
@@ -23,5 +25,7 @@ public interface AdminUserMapper {
 
     int checkUsername(String username);
 
+    List<AdminUser> selectAllUser();
 
+    int changeLockedStatus(@Param("adminUserId") Integer adminUserId, @Param("locked") Byte locked);
 }

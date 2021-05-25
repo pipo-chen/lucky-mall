@@ -124,13 +124,13 @@
         create_user,
       </if>
       <if test="createTime != null">
-        create_time,
+         create_time,
       </if>
       <if test="updateUser != null">
         update_user,
       </if>
       <if test="updateTime != null">
-        update_time,
+         update_time,
       </if>
       <if test="goodsDetailContent != null">
         goods_detail_content,
@@ -174,13 +174,15 @@
         #{createUser,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+--         #{createTime,jdbcType=TIMESTAMP},
+        unix_timestamp(),
       </if>
       <if test="updateUser != null">
         #{updateUser,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+--         #{updateTime,jdbcType=TIMESTAMP},
+        unix_timestamp(),
       </if>
       <if test="goodsDetailContent != null">
         #{goodsDetailContent,jdbcType=LONGVARCHAR},
@@ -230,7 +232,7 @@
         update_user = #{updateUser,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = unix_timestamp(),
       </if>
       <if test="goodsDetailContent != null">
         goods_detail_content = #{goodsDetailContent,jdbcType=LONGVARCHAR},
@@ -275,4 +277,10 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where goods_id = #{goodsId,jdbcType=BIGINT}
   </update>
+  <select id="selectList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from mall_goods_info
+    order by create_time desc
+  </select>
 </mapper>

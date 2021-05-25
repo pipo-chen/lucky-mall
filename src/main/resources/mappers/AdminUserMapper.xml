@@ -138,4 +138,17 @@
     from mall_admin_user
     where nick_name = #{nickname}
   </select>
+
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from mall_admin_user
+
+  </select>
+
+  <update id="changeLockedStatus" parameterType="map">
+    UPDATE mall_admin_user
+    SET locked = #{locked}
+    WHERE admin_user_id = #{adminUserId}
+  </update>
 </mapper>

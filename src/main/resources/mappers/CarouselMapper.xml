@@ -80,18 +80,12 @@
       <if test="carouselRank != null">
         carousel_rank,
       </if>
-      <if test="isDeleted != null">
         is_deleted,
-      </if>
-      <if test="createTime != null">
         create_time,
-      </if>
       <if test="createUser != null">
         create_user,
       </if>
-      <if test="updateTime != null">
         update_time,
-      </if>
       <if test="updateUser != null">
         update_user,
       </if>
@@ -109,21 +103,15 @@
       <if test="carouselRank != null">
         #{carouselRank,jdbcType=INTEGER},
       </if>
-      <if test="isDeleted != null">
-        #{isDeleted,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+        0,
+        now(),
       <if test="createUser != null">
         #{createUser,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateUser != null">
-        #{updateUser,jdbcType=INTEGER},
-      </if>
+      now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Carousel">
@@ -147,9 +135,7 @@
       <if test="createUser != null">
         create_user = #{createUser,jdbcType=INTEGER},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
       <if test="updateUser != null">
         update_user = #{updateUser,jdbcType=INTEGER},
       </if>
@@ -164,8 +150,23 @@
       is_deleted = #{isDeleted,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_time = now(),
       update_user = #{updateUser,jdbcType=INTEGER}
     where carousel_id = #{carouselId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from mall_carousel
+    where is_deleted != 1
+    order by update_time desc
+  </select>
+
+  <update id="changeDeleteStatus" parameterType="int">
+    update mall_carousel
+    set is_deleted = 1
+    where carousel_id = #{carouselId}
+
   </update>
 </mapper>

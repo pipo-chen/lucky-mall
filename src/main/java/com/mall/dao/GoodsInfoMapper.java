@@ -2,6 +2,8 @@ package com.mall.dao;
 
 import com.mall.pojo.GoodsInfo;
 
+import java.util.List;
+
 public interface GoodsInfoMapper {
 
     int deleteByPrimaryKey(Long goodsId);
@@ -17,4 +19,6 @@ public interface GoodsInfoMapper {
     int updateByPrimaryKeyWithBLOBs(GoodsInfo record);
 
     int updateByPrimaryKey(GoodsInfo record);
+
+    List<GoodsInfo> selectList();
 }

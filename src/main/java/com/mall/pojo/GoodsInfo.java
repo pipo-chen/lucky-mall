@@ -162,4 +162,26 @@ public class GoodsInfo {
     public void setGoodsDetailContent(String goodsDetailContent) {
         this.goodsDetailContent = goodsDetailContent == null ? null : goodsDetailContent.trim();
     }
+
+    @Override
+    public String toString() {
+        return "GoodsInfo{" +
+                "goodsId=" + goodsId +
+                ", goodsName='" + goodsName + '\'' +
+                ", goodsIntro='" + goodsIntro + '\'' +
+                ", goodsCategoryId=" + goodsCategoryId +
+                ", goodsCoverImg='" + goodsCoverImg + '\'' +
+                ", goodsCarousel='" + goodsCarousel + '\'' +
+                ", originalPrice=" + originalPrice +
+                ", sellingPrice=" + sellingPrice +
+                ", stockNum=" + stockNum +
+                ", tag='" + tag + '\'' +
+                ", goodsSellStatus=" + goodsSellStatus +
+                ", createUser=" + createUser +
+                ", createTime=" + createTime +
+                ", updateUser=" + updateUser +
+                ", updateTime=" + updateTime +
+                ", goodsDetailContent='" + goodsDetailContent + '\'' +
+                '}';
+    }
 }
