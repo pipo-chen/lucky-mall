@@ -34,10 +34,13 @@ public class CategoryServiceImp implements ICategoryService {
 		List<Map> categoryInfoList = Lists.newArrayList();
 		if (categoryId != null) {
 			for (Category categoryItem : categorySet) {
-				Map map = new HashMap();
-				map.put("categoryId",categoryItem.getCategoryId());
-				map.put("categoryName",categoryItem.getCategoryName());
-				categoryInfoList.add(map);
+				//把 id 不是当前 id 的返回出去
+				if (!categoryId.equals(categoryItem.getCategoryId())) {
+					Map map = new HashMap();
+					map.put("categoryId",categoryItem.getCategoryId());
+					map.put("categoryName",categoryItem.getCategoryName());
+					categoryInfoList.add(map);
+				}
 			}
 		}
 
@@ -56,4 +59,26 @@ public class CategoryServiceImp implements ICategoryService {
 		return categorySet;
 	}
 
+	@Override
+	public ServerResponse addCategory(Long parentId, String categoryName) {
+		Category category = new Category();
+		category.setParentId(parentId);
+		category.setCategoryName(categoryName);
+		category.setIsDeleted((byte)0);
+		category.setCategoryRank(10);
+		category.setCategoryLevel(parentId == 0 ? (byte) 1 : (byte) 2);
+
+		int row = categoryMapper.insertSelective(category);
+		if (row > 0)
+			return ServerResponse.createBySuccessMessage("创建成功！");
+		return ServerResponse.createBySuccessMessage("创建失败！");
+	}
+
+	@Override
+	public ServerResponse deleteCategory(Long categoryId) {
+		int row = categoryMapper.deleteByPrimaryKey(categoryId);
+		if (row > 0)
+			return ServerResponse.createBySuccessMessage("删除成功！");
+		return ServerResponse.createBySuccessMessage("删除失败！");
+	}
 }

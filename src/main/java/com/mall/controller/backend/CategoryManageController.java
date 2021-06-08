@@ -5,6 +5,7 @@ import com.mall.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,6 +27,19 @@ public class CategoryManageController {
 	@ResponseBody
 	public ServerResponse getAllCategory() {
 		return iCategoryService.selectBasicCategory((long) 0);
+	}
+
+	@RequestMapping(value = "add_category.do",method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse addCategory(Long parentId, String categoryName) {
+		return iCategoryService.addCategory(parentId, categoryName);
+
+	}
+	@RequestMapping(value = "delete_category.do",method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse deleteCategory(Long categoryId) {
+		return iCategoryService.deleteCategory(categoryId);
+
 	}
 
 

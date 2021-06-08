@@ -35,6 +35,8 @@ public class AdminUserServiceImp implements IAdminUserService {
 		if (adminUser == null) {
 			return ServerResponse.createByErrorMessage("密码错误！");
 		}
+		//TODO 还需要判断一下是否被禁用
+
 		adminUser.setLoginPassword(StringUtils.EMPTY);
 		return ServerResponse.createBySuccess("登录成功!",adminUser);
 	}

@@ -184,5 +184,6 @@
     <include refid="Base_Column_List"/>
     from mall_goods_category
     where parent_id = #{parentId}
+    order by parent_id asc
   </select>
 </mapper>

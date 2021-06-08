@@ -167,6 +167,5 @@
     update mall_carousel
     set is_deleted = 1
     where carousel_id = #{carouselId}
-
   </update>
 </mapper>
